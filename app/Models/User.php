@@ -1,5 +1,5 @@
 <?php
-// app/Models/User.php (Laravel 10/11 version)
+// app/Models/User.php (Laravel 10 version)
 
 namespace App\Models;
 

@@ -1,5 +1,5 @@
 <?php
-// app/Models/Episode.php
+// app/Models/Episode.php (Laravel 10)
 
 namespace App\Models;
 
@@ -28,15 +28,12 @@ class Episode extends Model
         'is_published',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'published_at' => 'datetime',
-            'is_manual' => 'boolean',
-            'is_published' => 'boolean',
-            'file_size' => 'integer',
-        ];
-    }
+    protected $casts = [
+        'published_at' => 'datetime',
+        'is_manual' => 'boolean',
+        'is_published' => 'boolean',
+        'file_size' => 'integer',
+    ];
 
     // Relationships
     public function show()
@@ -76,7 +73,7 @@ class Episode extends Model
         ];
     }
 
-    // Helper methods that are called in the controller
+    // Helper methods
     public function getFormattedDuration(): string
     {
         if (!$this->duration) {
@@ -122,7 +119,6 @@ class Episode extends Model
         return $this->comments()->count();
     }
 
-    // Additional helper method to check if a specific user has favorited this episode
     public function isFavoritedBy(User $user): bool
     {
         return $this->favorites()->where('user_id', $user->id)->exists();

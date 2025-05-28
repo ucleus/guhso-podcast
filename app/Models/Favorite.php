@@ -1,5 +1,5 @@
 <?php
-// app/Models/Favorite.php
+// app/Models/Favorite.php (Laravel 10)
 
 namespace App\Models;
 

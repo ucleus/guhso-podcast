@@ -1,5 +1,5 @@
 <?php
-// app/Models/Show.php
+// app/Models/Show.php (Laravel 10)
 
 namespace App\Models;
 
@@ -14,22 +14,19 @@ class Show extends Model
     protected $fillable = [
         'title',
         'description',
-        'cover_image_url',
-        'rss_feed_url',
-        'language',
         'author',
+        'email',
         'website',
+        'rss_feed',
+        'artwork_url',
+        'language',
         'is_active',
-        'last_fetched_at',
+        'category_id',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-            'last_fetched_at' => 'datetime',
-        ];
-    }
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     // Relationships
     public function episodes()
@@ -42,9 +39,18 @@ class Show extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function publishedEpisodes()
+    // Helper methods
+    public function getLatestEpisode()
     {
-        return $this->episodes()->where('is_published', true)->orderBy('published_at', 'desc');
+        return $this->episodes()
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->first();
+    }
+
+    public function getEpisodesCount(): int
+    {
+        return $this->episodes()->where('is_published', true)->count();
     }
 
     // Scout searchable configuration
@@ -55,23 +61,6 @@ class Show extends Model
             'title' => $this->title,
             'description' => $this->description,
             'author' => $this->author,
-            'language' => $this->language,
         ];
-    }
-
-    // Helper methods
-    public function isRssFeed(): bool
-    {
-        return !is_null($this->rss_feed_url);
-    }
-
-    public function getLatestEpisode()
-    {
-        return $this->publishedEpisodes()->first();
-    }
-
-    public function getEpisodeCount(): int
-    {
-        return $this->publishedEpisodes()->count();
     }
 }

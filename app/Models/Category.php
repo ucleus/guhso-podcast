@@ -1,11 +1,10 @@
 <?php
-// app/Models/Category.php
+// app/Models/Category.php (Laravel 10)
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -15,7 +14,6 @@ class Category extends Model
         'name',
         'slug',
         'description',
-        'color',
     ];
 
     // Relationships
@@ -24,21 +22,9 @@ class Category extends Model
         return $this->belongsToMany(Show::class);
     }
 
-    // Automatically generate slug from name
-    protected static function boot()
+    // Helper methods
+    public function getShowsCount(): int
     {
-        parent::boot();
-
-        static::creating(function ($category) {
-            if (empty($category->slug)) {
-                $category->slug = Str::slug($category->name);
-            }
-        });
-
-        static::updating(function ($category) {
-            if ($category->isDirty('name') && empty($category->slug)) {
-                $category->slug = Str::slug($category->name);
-            }
-        });
+        return $this->shows()->where('is_active', true)->count();
     }
 }
