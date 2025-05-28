@@ -8,6 +8,7 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/podcast', [HomeController::class, 'podcast'])->name('podcast');
