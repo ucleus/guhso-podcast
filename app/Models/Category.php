@@ -19,7 +19,7 @@ class Category extends Model
     // Relationships
     public function shows()
     {
-        return $this->belongsToMany(Show::class);
+        return $this->belongsToMany(Show::class, 'show_category');
     }
 
     // Helper methods
