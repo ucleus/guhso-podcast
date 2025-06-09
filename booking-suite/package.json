@@ -1,0 +1,33 @@
+{
+  "name": "booking-suite",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/client": "latest",
+    "@supabase/supabase-js": "latest",
+    "@tanstack/react-query": "latest",
+    "@trpc/server": "latest",
+    "@trpc/react-query": "latest",
+    "@square/square": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "14.0.0",
+    "react-big-calendar": "latest",
+    "shadcn-ui": "latest",
+    "twilio": "latest",
+    "resend": "latest"
+  },
+  "devDependencies": {
+    "prisma": "latest",
+    "tailwindcss": "latest",
+    "postcss": "latest",
+    "autoprefixer": "latest",
+    "typescript": "^5.0.0"
+  }
+}
